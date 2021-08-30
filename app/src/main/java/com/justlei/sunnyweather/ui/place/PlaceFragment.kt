@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.justlei.sunnyweather.MainActivity
 
 import com.justlei.sunnyweather.R
 import com.justlei.sunnyweather.ui.weather.WeatherActivity
@@ -32,8 +33,8 @@ class PlaceFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (viewModel.isPlaceSaved()){
-            //若当前有存储城市数据，则直接跳转到天气
+        if (viewModel.isPlaceSaved() && activity is MainActivity){
+            //若当前有存储城市数据且在Mainactivity中，则直接跳转到天气
             val place = viewModel.getSavePlace()
             val intent = Intent(context,WeatherActivity::class.java).apply {
                 putExtra("location_lng",place.location.lng)
